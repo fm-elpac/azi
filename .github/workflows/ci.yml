@@ -25,7 +25,7 @@ jobs:
       # TODO
 
       # azi.aar
-      - run: cd azi-arr && ./gradlew assemble
+      - run: cd azi-aar && ./gradlew assemble
       # upload
       - run: cp azi-aar/libazi/build/outputs/aar/libazi-release.aar azi.aar
       - uses: actions/upload-artifact@v4
