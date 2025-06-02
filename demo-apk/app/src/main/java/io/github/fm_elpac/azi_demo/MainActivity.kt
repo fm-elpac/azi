@@ -11,6 +11,8 @@ class MainActivity: Activity() {
         super.onCreate(savedInstanceState)
 
         Azi.log("azi-demo MainActivity.onCreate()")
+        // test
+        Azi.cpAsset("test-init/azi_init.sh", Azi.env(Azi.AZI_DIR_SDCARD_DATA) + "/azi_init.sh")
         // TODO
     }
 

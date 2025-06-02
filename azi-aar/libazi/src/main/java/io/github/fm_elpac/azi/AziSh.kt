@@ -1,5 +1,7 @@
 package io.github.fm_elpac.azi
 
+import java.io.File
+
 import android.content.Context
 
 class AziSh(val c: Context, val azi: AziApi) {
@@ -39,6 +41,7 @@ class AziSh(val c: Context, val azi: AziApi) {
         return null
     }
 
+    // 阻塞: 等待命令执行结束
     fun sh(cmd: String): Int {
         // TODO
         return -1

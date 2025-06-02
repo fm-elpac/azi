@@ -29,5 +29,6 @@ find ${AZI_DIR_SDCARD_CACHE}
 echo test env
 env
 
+echo test encode "测试中文编码, 喵喵"
 # ok
 echo test ok

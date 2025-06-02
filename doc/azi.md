@@ -41,7 +41,7 @@ System.out: AziSh.env AZI_DIR_SDCARD_CACHE /storage/emulated/0/Android/data/io.g
 
 - `AZI_DIR_SDCARD_DATA/target_dir/azi_init.sh`
 
-- `AZI_DIR_SDCARD_CACHE/azi-log/T-o|e.txt`
+- `AZI_DIR_SDCARD_CACHE/azi_log/T-o|e.txt`
 
 - `AZI_DIR_APP_DATA/azi/unzip` (chmod +x)
 

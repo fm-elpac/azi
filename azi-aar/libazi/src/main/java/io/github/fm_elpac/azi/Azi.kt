@@ -39,8 +39,9 @@ class Azi {
 
         @JvmStatic
         fun sh(cmd: String): Int {
-            if (null != api) {
-                return api!!.sh(cmd)
+            val a = api
+            if (null != a) {
+                return a.sh(cmd)
             }
             return -1
         }

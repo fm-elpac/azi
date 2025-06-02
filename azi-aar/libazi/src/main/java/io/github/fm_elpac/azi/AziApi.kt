@@ -13,16 +13,19 @@ class AziApi(val c: Context) {
         const val AZI_DIR_SDCARD_CACHE = "AZI_DIR_SDCARD_CACHE"
     }
 
-    private var aziSh: AziSh
-    private var aziLog: AziLog
-    private var aziAsset: AziAsset
-    private var aziInit: AziInit
+    private val aziSh: AziSh
+    private val aziLog: AziLog
+    private val aziAsset: AziAsset
+    private val aziInit: AziInit
 
     init {
         aziSh = AziSh(c, this)
         aziLog = AziLog(this)
         aziAsset = AziAsset(c, this)
         aziInit = AziInit(this)
+
+        // DEBUG: 初始化完成 (写日志)
+        log("AziApi.init")
     }
 
     /**
@@ -73,5 +76,9 @@ class AziApi(val c: Context) {
      */
     fun cpAsset(name: String, target: String) {
         aziAsset.cpAsset(name, target)
+    }
+
+    fun getLog(): AziLog {
+        return aziLog
     }
 }
