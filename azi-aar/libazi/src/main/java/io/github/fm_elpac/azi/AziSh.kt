@@ -5,6 +5,8 @@ import java.io.File
 import android.content.Context
 
 class AziSh(val c: Context, val azi: AziApi) {
+    // 命令编号 (执行计数)
+    private var pI: Int = 0
 
     // 获取 AZI_DIR_APP_DATA 的值
     private fun envDirAppData(): String {
@@ -42,10 +44,37 @@ class AziSh(val c: Context, val azi: AziApi) {
     }
 
     // 阻塞: 等待命令执行结束
-    fun sh(cmd: String): Int {
-        // TODO
-        return -1
-    }
+    fun sh(cmd: ProcessBuilder): Int {
+        pI += 1
+        val i = pI
+        // 日志 (文本)
+        val text = "AziSh.sh(" + i + "):  " + cmd.command()
+        // 日志 高级用法
+        val log = azi.getLog()
+        log.log(text)
+        log.logO(text)
+        log.logE(text)
 
-    // TODO
+        // stdout, stderr 输出 (追加) 到日志文件
+        cmd.redirectOutput(ProcessBuilder.Redirect.appendTo(log.getLogO()))
+        cmd.redirectError(ProcessBuilder.Redirect.appendTo(log.getLogE()))
+        // 设置环境变量
+        val e = cmd.environment()
+        e.put(AziApi.AZI_DIR_APP_DATA, env(AziApi.AZI_DIR_APP_DATA))
+        e.put(AziApi.AZI_DIR_SDCARD_DATA, env(AziApi.AZI_DIR_SDCARD_DATA))
+        e.put(AziApi.AZI_DIR_SDCARD_CACHE, env(AziApi.AZI_DIR_SDCARD_CACHE))
+
+        // 开始执行
+        val p = cmd.start()
+        // 等待结束, 获取退出码
+        val c = p.waitFor()
+        if (0 != c) {
+            // 记录错误
+            val text = "AziSh.sh(" + i + ")  exit code " + c
+            log.log(text)
+            log.logO(text)
+            log.logE(text)
+        }
+        return c
+    }
 }

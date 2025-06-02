@@ -12,7 +12,9 @@ class MainActivity: Activity() {
 
         Azi.log("azi-demo MainActivity.onCreate()")
         // test
-        Azi.cpAsset("test-init/azi_init.sh", Azi.env(Azi.AZI_DIR_SDCARD_DATA) + "/azi_init.sh")
+        val sh = Azi.env(Azi.AZI_DIR_SDCARD_DATA) + "/azi_init.sh"
+        Azi.cpAsset("test-init/azi_init.sh", sh)
+        Azi.sh(ProcessBuilder("/system/bin/sh", sh))
         // TODO
     }
 

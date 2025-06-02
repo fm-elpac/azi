@@ -64,7 +64,7 @@ class AziApi(val c: Context) {
      *
      * 返回: 退出码 exit_code
      */
-    fun sh(cmd: String): Int {
+    fun sh(cmd: ProcessBuilder): Int {
         return aziSh.sh(cmd)
     }
 

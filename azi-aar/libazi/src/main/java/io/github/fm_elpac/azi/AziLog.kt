@@ -5,6 +5,9 @@ import java.io.BufferedWriter
 import java.io.FileWriter
 
 class AziLog(val azi: AziApi) {
+    // 日志文件
+    private val logO: File
+    private val logE: File
     // 日志文件写入器
     private val w: BufferedWriter
     private val wo: BufferedWriter
@@ -17,9 +20,9 @@ class AziLog(val azi: AziApi) {
         // 创建日志文件
         val log = createLogFile(t)
         // stdout
-        val logO = createLogFileO(t)
+        logO = createLogFileO(t)
         // stderr
-        val logE = createLogFileE(t)
+        logE = createLogFileE(t)
 
         w = makeWriter(log)
         wo = makeWriter(logO)
@@ -46,6 +49,14 @@ class AziLog(val azi: AziApi) {
 
     fun makeWriter(f: File): BufferedWriter {
         return BufferedWriter(FileWriter(f))
+    }
+
+    fun getLogO(): File {
+        return logO
+    }
+
+    fun getLogE(): File {
+        return logE
     }
 
     /**

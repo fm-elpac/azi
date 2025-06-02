@@ -38,7 +38,7 @@ class Azi {
         }
 
         @JvmStatic
-        fun sh(cmd: String): Int {
+        fun sh(cmd: ProcessBuilder): Int {
             val a = api
             if (null != a) {
                 return a.sh(cmd)
