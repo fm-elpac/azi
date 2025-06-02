@@ -10,23 +10,30 @@
 
 - demo-apk (`azi-demo.apk`)
 
-TODO
-
 ## Azi 环境变量
 
 指向对应的目录 (path), 在执行 shell 命令时作为环境变量可访问.
 
 - `AZI_DIR_APP_DATA`
 
-  TODO `/data/data/APP_ID/files`
+  内部的应用数据文件存储 (外部无法访问) `/data/data/APP_ID/files`
 
 - `AZI_DIR_SDCARD_DATA`
 
-  TODO `/sdcard/Andorid/data/APP_ID/files`
+  sdcard 上的应用文件存储 (使用系统文件管理器可以访问)
+  `/sdcard/Andorid/data/APP_ID/files`
 
 - `AZI_DIR_SDCARD_CACHE`
 
-  TODO `/sdcard/Android/data/APP_ID/cache`
+  sdcard 上的缓存文件 (清除缓存可以删除) `/sdcard/Android/data/APP_ID/cache`
+
+比如:
+
+```
+System.out: AziSh.env AZI_DIR_APP_DATA /data/user/0/io.github.fm_elpac.azi_demo/files
+System.out: AziSh.env AZI_DIR_SDCARD_DATA /storage/emulated/0/Android/data/io.github.fm_elpac.azi_demo/files
+System.out: AziSh.env AZI_DIR_SDCARD_CACHE /storage/emulated/0/Android/data/io.github.fm_elpac.azi_demo/cache
+```
 
 重要文件:
 
@@ -43,8 +50,6 @@ TODO
 - `assets/azi/loader/index.html`
 
 - `assets/APP_INIT.azi.zip`
-
-TODO
 
 ## 应用初始化过程
 

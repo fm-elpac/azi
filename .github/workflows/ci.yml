@@ -33,6 +33,9 @@ jobs:
           name: azi-aar
           path: azi.aar
 
+      # cp azi.aar
+      - run: mkdir -p demo-apk/app/libs && cp azi.aar demo-apk/app/libs/
+
       # azi-demo.apk
       - run: cd demo-apk && ./gradlew assemble
       # upload
