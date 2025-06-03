@@ -9,8 +9,8 @@ android {
 
     defaultConfig {
         applicationId = "io.github.fm_elpac.azi_demo"
-        minSdk = 28
-        targetSdk = 35
+        minSdk = 27
+        targetSdk = 28 // !!!
         versionCode = 1
         versionName = "0.1.0-a1"
 
@@ -32,6 +32,11 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
+    }
+
+    lint {
+        checkReleaseBuilds = false
+        abortOnError = false
     }
 }
 

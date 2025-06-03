@@ -9,7 +9,7 @@ class DemoApp: Application() {
     override fun onCreate() {
         super.onCreate()
 
+        // init azi
         Azi.setContext(this)
-        // TODO
     }
 }
