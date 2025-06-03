@@ -30,7 +30,7 @@ jobs:
       # aarch64-linux-android
       - run: |
           export PATH=$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin:$PATH && \
-          cargo build --target aarch64-linux-android --release
+          cd azi-unzip && cargo build --target aarch64-linux-android --release
         env:
           CARGO_TARGET_AARCH64_LINUX_ANDROID_LINKER: aarch64-linux-android28-clang
           AR_aarch64_linux_android: llvm-ar
