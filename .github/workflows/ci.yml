@@ -22,6 +22,27 @@ jobs:
 
       - run: deno fmt --check
 
+      # azi-unzip
+      - run: rustup target add aarch64-linux-android
+      - run: cd azi-unzip && cargo fmt --check
+      - run: cd azi-unzip && cargo build
+      - run: cd azi-unzip && cargo test
+      # aarch64-linux-android
+      - run: |
+          export PATH=$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin:$PATH && \
+          cargo build --target aarch64-linux-android --release
+        env:
+          CARGO_TARGET_AARCH64_LINUX_ANDROID_LINKER: aarch64-linux-android28-clang
+          AR_aarch64_linux_android: llvm-ar
+          CC_aarch64_linux_android: aarch64-linux-android28-clang
+      # upload
+      - run: cp azi-unzip/target/aarch64-linux-android/release/azi-unzip unzip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: azi-unzip
+          path: unzip
+
+      - run: mkdir -p azi-aar/libazi/src/main/assets/azi && cp unzip azi-aar/libazi/src/main/assets/azi/
       # TODO
 
       # azi.aar
