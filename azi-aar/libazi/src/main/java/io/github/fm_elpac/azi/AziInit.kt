@@ -2,6 +2,7 @@ package io.github.fm_elpac.azi
 
 import java.io.File
 
+import android.os.Build
 import android.os.Looper
 import android.os.Handler
 
@@ -73,7 +74,15 @@ class AziInit(val azi: AziApi) {
             azi.cpAsset(asset_zip, d_zip.getAbsolutePath())
         }
         // 解压 zip
-        azi.sh(ProcessBuilder(p_unzip, d_zip.getAbsolutePath(), d_target.getAbsolutePath()))
+        val p_zip = d_zip.getAbsolutePath()
+        val p_target = d_target.getAbsolutePath()
+        val pb: ProcessBuilder
+        if (Build.VERSION.SDK_INT >= AziApi.AAL10) {
+            pb = ProcessBuilder(AziApi.AL, p_unzip, p_zip, p_target)
+        } else {
+            pb = ProcessBuilder(p_unzip, p_zip, p_target)
+        }
+        azi.sh(pb)
     }
 
     // 检查执行 azi_init.sh

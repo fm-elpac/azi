@@ -57,6 +57,10 @@ jobs:
       # cp azi.aar
       - run: mkdir -p demo-apk/app/libs && cp azi.aar demo-apk/app/libs/
 
+      # test-init.azi.zip
+      - run: cd demo-apk/test-init && zip ../test-init.azi.zip *
+      - run: mkdir -p demo-apk/app/src/main/assets && cp demo-apk/test-init.azi.zip demo-apk/app/src/main/assets/
+
       # azi-demo.apk
       - run: cd demo-apk && ./gradlew assemble
       # upload

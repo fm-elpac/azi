@@ -10,7 +10,9 @@ android {
     defaultConfig {
         applicationId = "io.github.fm_elpac.azi_demo"
         minSdk = 27
-        targetSdk = 28 // !!!
+        //targetSdk = 28
+        targetSdk = 35
+
         versionCode = 1
         versionName = "0.1.0-a1"
 

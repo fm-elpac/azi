@@ -11,6 +11,11 @@ class AziApi(val c: Context) {
         const val AZI_DIR_APP_DATA = "AZI_DIR_APP_DATA"
         const val AZI_DIR_SDCARD_DATA = "AZI_DIR_SDCARD_DATA"
         const val AZI_DIR_SDCARD_CACHE = "AZI_DIR_SDCARD_CACHE"
+
+        // Android 10 (api level 29)
+        const val AAL10 = 29
+        // Android system linker (aarch64)
+        const val AL = "/system/bin/linker64"
     }
 
     private val aziSh: AziSh
