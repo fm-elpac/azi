@@ -181,13 +181,43 @@ package: `io.github.fm_elpac.azi`
 
   对 Android WebView 的封装.
 
-  默认提供 js bridge API: `azi_api`
+  TODO 默认提供 js bridge API: `azi_api`
 
   - `AziWebView.getWebView() -> WebView`
 
     返回内部的原始 WebView (用于自定义操作).
 
-TODO
+  - `AziWebView.addJsApi(name, api)`
+
+    添加 JavascriptInterface
+
+  - `AziWebView.loadUrl(url)`
+
+    加载任意 URL
+
+  - `AziWebView.loadLoader()`
+
+    加载 (内置的) Azi ui-loader
+
+  - `AziWebView.loadLocal(path)`
+
+    加载本地文件 `file:///`
+
+  - `AziWebView.loadAsset(path)`
+
+    加载 apk assets `file:///android_asset/`
+
+  - `AziWebView.loadSdcard(azi_env, path)`
+
+    加载 azi 环境变量中的文件: `AZI_ENV_SDCARD_DATA`, `AZI_ENV_SDCARD_CACHE`
+
+  默认 WebView 启用的功能:
+
+  - js
+  - localStorage
+  - sessionStorage
+  - TODO client ?
+  - TODO 返回按键处理
 
 ## AziWebView API
 
