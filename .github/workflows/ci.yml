@@ -14,7 +14,6 @@ jobs:
       - uses: denoland/setup-deno@v2
         with:
           deno-version: v2.x
-
       - uses: actions/setup-java@v4
         with:
           distribution: "temurin"
@@ -28,13 +27,7 @@ jobs:
       - run: cd azi-unzip && cargo build
       - run: cd azi-unzip && cargo test
       # aarch64-linux-android
-      - run: |
-          export PATH=$ANDROID_NDK_HOME/toolchains/llvm/prebuilt/linux-x86_64/bin:$PATH && \
-          cd azi-unzip && cargo build --target aarch64-linux-android --release
-        env:
-          CARGO_TARGET_AARCH64_LINUX_ANDROID_LINKER: aarch64-linux-android28-clang
-          AR_aarch64_linux_android: llvm-ar
-          CC_aarch64_linux_android: aarch64-linux-android28-clang
+      - run: make azi-unzip
       # upload
       - run: cp azi-unzip/target/aarch64-linux-android/release/azi-unzip unzip
       - uses: actions/upload-artifact@v4
@@ -42,11 +35,8 @@ jobs:
           name: azi-unzip
           path: unzip
 
-      - run: mkdir -p azi-aar/libazi/src/main/assets/azi && cp unzip azi-aar/libazi/src/main/assets/azi/
-      # TODO
-
       # azi.aar
-      - run: cd azi-aar && ./gradlew assemble
+      - run: make azi-aar
       # upload
       - run: cp azi-aar/libazi/build/outputs/aar/libazi-release.aar azi.aar
       - uses: actions/upload-artifact@v4
@@ -54,15 +44,8 @@ jobs:
           name: azi-aar
           path: azi.aar
 
-      # cp azi.aar
-      - run: mkdir -p demo-apk/app/libs && cp azi.aar demo-apk/app/libs/
-
-      # test-init.azi.zip
-      - run: cd demo-apk/test-init && zip ../test-init.azi.zip *
-      - run: mkdir -p demo-apk/app/src/main/assets && cp demo-apk/test-init.azi.zip demo-apk/app/src/main/assets/
-
       # azi-demo.apk
-      - run: cd demo-apk && ./gradlew assemble
+      - run: make demo-apk
       # upload
       - run: cp demo-apk/app/build/outputs/apk/debug/app-debug.apk azi-demo-debug.apk
       - uses: actions/upload-artifact@v4

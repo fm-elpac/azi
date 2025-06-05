@@ -51,7 +51,7 @@ class AziWebView(val c: Context) {
     /**
      * 添加 JavascriptInterface
      */
-    fun addJsApi(name: String, api: Object) {
+    fun addJsApi(name: String, api: Any) {
         w.addJavascriptInterface(api, name)
     }
 

@@ -3,30 +3,28 @@ package io.github.fm_elpac.azi
 import java.io.File
 import java.io.BufferedWriter
 import java.io.FileWriter
+import java.io.OutputStreamWriter
 
 class AziLog(val azi: AziApi) {
+    // 时间戳
+    private val t: String
     // 日志文件
-    private val logO: File
-    private val logE: File
+    private var logO: File = File("/") // placeholder
+    private var logE: File = File("/")
     // 日志文件写入器
     private val w: BufferedWriter
-    private val wo: BufferedWriter
-    private val we: BufferedWriter
+    private var wo: BufferedWriter = BufferedWriter(OutputStreamWriter(System.out))
+    private var we: BufferedWriter = BufferedWriter(OutputStreamWriter(System.err))
 
     init {
         // 时间戳
-        val t = AziT.now()
+        t = AziT.now()
 
         // 创建日志文件
         val log = createLogFile(t)
-        // stdout
-        logO = createLogFileO(t)
-        // stderr
-        logE = createLogFileE(t)
-
         w = makeWriter(log)
-        wo = makeWriter(logO)
-        we = makeWriter(logE)
+
+        resetLogOE()
     }
 
     fun log(text: String) {
@@ -48,7 +46,21 @@ class AziLog(val azi: AziApi) {
     }
 
     fun makeWriter(f: File): BufferedWriter {
-        return BufferedWriter(FileWriter(f))
+        // append: true
+        return BufferedWriter(FileWriter(f, true))
+    }
+
+    /**
+     * 重新创建 logO, logE 写入器
+     */
+    fun resetLogOE() {
+        // stdout
+        logO = createLogFileO(t)
+        // stderr
+        logE = createLogFileE(t)
+
+        wo = makeWriter(logO)
+        we = makeWriter(logE)
     }
 
     fun getLogO(): File {

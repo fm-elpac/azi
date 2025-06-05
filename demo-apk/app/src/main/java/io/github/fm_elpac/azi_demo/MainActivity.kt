@@ -2,6 +2,9 @@ package io.github.fm_elpac.azi_demo
 
 import android.app.Activity
 import android.os.Bundle
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import android.webkit.JavascriptInterface
 
 import io.github.fm_elpac.azi.Azi
 import io.github.fm_elpac.azi.AziCb
@@ -23,6 +26,9 @@ class MainActivity: Activity() {
         // status bar color (black)
         window.statusBarColor = 0xff000000.toInt()
 
+        // 添加自定义 js api
+        w.addJsApi("demo", DemoApi(this))
+
         aw = w
         // 开始 (后台) 初始化
         val cb = object: AziCb {
@@ -33,5 +39,25 @@ class MainActivity: Activity() {
         Azi.initZip("test-init.azi.zip", "demo", cb)
     }
 
-    // TODO
+    // 在受限的 WebView 环境中加载页面
+    fun openCleanWebView(url: String) {
+        Azi.log("Demo.openCleanWebView()  " + url)
+
+        val w = WebView(this)
+        w.settings.setJavaScriptEnabled(true)
+        w.setWebViewClient(WebViewClient())
+
+        setContentView(w)
+        w.loadUrl(url)
+    }
+}
+
+class DemoApi(val a: MainActivity) {
+    // 打开外部页面 URL
+    @JavascriptInterface
+    fun openPage(url: String) {
+        a.aw?.runOnUiThread {
+            a.openCleanWebView(url)
+        }
+    }
 }

@@ -48,12 +48,12 @@ class AziSh(val c: Context, val azi: AziApi) {
         pI += 1
         val i = pI
         // 日志 (文本)
-        val text = "AziSh.sh(" + i + "):  " + cmd.command()
+        val t1 = "AziSh.sh(" + i + "):  " + cmd.command()
         // 日志 高级用法
         val log = azi.getLog()
-        log.log(text)
-        log.logO(text)
-        log.logE(text)
+        log.log(t1)
+        log.logO(t1)
+        log.logE(t1)
 
         // stdout, stderr 输出 (追加) 到日志文件
         cmd.redirectOutput(ProcessBuilder.Redirect.appendTo(log.getLogO()))
@@ -68,12 +68,16 @@ class AziSh(val c: Context, val azi: AziApi) {
         val p = cmd.start()
         // 等待结束, 获取退出码
         val c = p.waitFor()
+        // DEBUG
+        val t2 = "AziSh.sh(" + i + ")  exit code " + c
         if (0 != c) {
-            // 记录错误
-            val text = "AziSh.sh(" + i + ")  exit code " + c
-            log.log(text)
-            log.logO(text)
-            log.logE(text)
+            // 记录错误: 所有日志文件
+            log.logE(t2)
+            log.logO(t2)
+            log.log(t2)
+        } else {
+            // 成功: 仅写入 logO 日志
+            log.logO(t2)
         }
         return c
     }
