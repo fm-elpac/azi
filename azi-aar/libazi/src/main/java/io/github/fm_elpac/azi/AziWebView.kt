@@ -25,17 +25,17 @@ class AziWebView(val c: Context) {
         // 默认初始化行为
 
         // 启用 javascript
-        w.settings.setJavaScriptEnabled(true)
+        w.settings.javaScriptEnabled = true
         // 启用 localStorage, sessionStorage
-        w.settings.setDomStorageEnabled(true)
+        w.settings.domStorageEnabled = true
 
         // 允许访问本地文件 (比如 sdcard)
-        w.settings.setAllowFileAccess(true)
-        w.settings.setAllowFileAccessFromFileURLs(true)
-        w.settings.setAllowUniversalAccessFromFileURLs(true)
+        w.settings.allowFileAccess = true
+        w.settings.allowFileAccessFromFileURLs = true
+        w.settings.allowUniversalAccessFromFileURLs = true
 
         //w.settings.setDatabaseEnabled(true)
-        w.settings.setMediaPlaybackRequiresUserGesture(false)
+        w.settings.mediaPlaybackRequiresUserGesture = false
         w.settings.setGeolocationEnabled(false)
         // TODO
         w.setWebViewClient(WebViewClient())
@@ -93,7 +93,7 @@ class AziWebView(val c: Context) {
         // path join
         val f = File(File(Azi.env(azi_env)!!), path)
 
-        loadLocal(f.getAbsolutePath())
+        loadLocal(f.absolutePath)
     }
 
     /**

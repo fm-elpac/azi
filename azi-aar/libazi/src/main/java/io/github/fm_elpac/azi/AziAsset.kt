@@ -11,7 +11,7 @@ class AziAsset(val c: Context, val azi: AziApi) {
         azi.log("AziAsset.cp assets/" + name + " -> " + target)
 
         // assets: InputStream
-        val inputStream = c.getAssets().open(name)
+        val inputStream = c.assets.open(name)
         // 目标输出文件
         val outputStream = FileOutputStream(File(target))
         // 复制 stream

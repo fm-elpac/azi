@@ -10,17 +10,17 @@ class AziSh(val c: Context, val azi: AziApi) {
 
     // 获取 AZI_DIR_APP_DATA 的值
     private fun envDirAppData(): String {
-        return c.getFilesDir().getAbsolutePath()
+        return c.getFilesDir().absolutePath
     }
 
     // 获取 AZI_DIR_SDCARD_DATA 的值
     private fun envDirSdcardData(): String {
-        return c.getExternalFilesDir(null)!!.getAbsolutePath()
+        return c.getExternalFilesDir(null)!!.absolutePath
     }
 
     // 获取 AZI_DIR_SDCARD_CACHE 的值
     private fun envDirSdcardCache(): String {
-        return c.getExternalCacheDir()!!.getAbsolutePath()
+        return c.getExternalCacheDir()!!.absolutePath
     }
 
     init {

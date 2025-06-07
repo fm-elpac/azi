@@ -1,5 +1,9 @@
 # azi build Makefile
 
+# fdroid build
+all: fdroid-setup azi-unzip ui-loader azi-aar demo-apk
+.PHONY: all
+
 # 构建: azi-demo.apk
 demo-apk: demo-apk-azi-aar demo-apk-init-zip
 	cd demo-apk && ./gradlew assemble
@@ -34,5 +38,15 @@ azi-unzip:
 	cd azi-unzip && \
 	cargo build --target aarch64-linux-android --release
 .PHONY: azi-unzip
+
+# 构建: azi-loader
+ui-loader:
+	echo TODO
+.PHONY: ui-loader
+
+# fdroid 初始化准备工作
+fdroid-setup:
+	echo TODO
+.PHONY: fdroid-setup
 
 # TODO

@@ -9,8 +9,11 @@ import android.os.Handler
 class AziInit(val azi: AziApi) {
 
     fun initZip(asset_zip: String, target_dir: String, cb: AziCb?) {
+        val i = this
         // 创建新线程, 并执行
-        Thread(AziInitThread(this, asset_zip, target_dir, cb)).start()
+        Thread {
+            i.doInitZip(asset_zip, target_dir, cb)
+        }.start()
     }
 
     // 在后台线程中运行
@@ -42,7 +45,7 @@ class AziInit(val azi: AziApi) {
         // 尝试创建目录
         d_azi.mkdirs()
         // 复制文件
-        val p_unzip = File(d_azi, "unzip").getAbsolutePath()
+        val p_unzip = File(d_azi, "unzip").absolutePath
         azi.cpAsset("azi/unzip", p_unzip)
         // chmod +x
         azi.sh(ProcessBuilder("chmod", "+x", p_unzip))
@@ -61,7 +64,7 @@ class AziInit(val azi: AziApi) {
         val d_target = getDirTarget(target_dir)
         if (d_target.exists()) {
             // 跳过
-            azi.log("  skip exist  " + d_target.getAbsolutePath())
+            azi.log("  skip exist  " + d_target.absolutePath)
             return
         }
 
@@ -71,11 +74,11 @@ class AziInit(val azi: AziApi) {
         val d_zip = File(d_cache, asset_zip)
         // 从 assets 复制 zip 到 AZI_DIR_SDCARD_CACHE (如果不存在)
         if (!d_zip.exists()) {
-            azi.cpAsset(asset_zip, d_zip.getAbsolutePath())
+            azi.cpAsset(asset_zip, d_zip.absolutePath)
         }
         // 解压 zip
-        val p_zip = d_zip.getAbsolutePath()
-        val p_target = d_target.getAbsolutePath()
+        val p_zip = d_zip.absolutePath
+        val p_target = d_target.absolutePath
         val pb: ProcessBuilder
         if (Build.VERSION.SDK_INT >= AziApi.AAL10) {
             pb = ProcessBuilder(AziApi.AL, p_unzip, p_zip, p_target)
@@ -91,7 +94,7 @@ class AziInit(val azi: AziApi) {
         val azi_ok = File(d_sdcard, "azi/azi_ok")
         if (azi_ok.exists()) {
             // 跳过
-            azi.log("  skip sh  " + azi_ok.getAbsolutePath())
+            azi.log("  skip sh  " + azi_ok.absolutePath)
             return
         }
 
@@ -99,7 +102,7 @@ class AziInit(val azi: AziApi) {
         val init_sh = File(d_target, "azi_init.sh")
         if (init_sh.exists()) {
             // 执行初始化脚本
-            val c = azi.sh(ProcessBuilder("/system/bin/sh", init_sh.getAbsolutePath()))
+            val c = azi.sh(ProcessBuilder("/system/bin/sh", init_sh.absolutePath))
             if (0 != c) {
                 throw Exception("azi_init.sh exit " + c)
             }
@@ -108,13 +111,7 @@ class AziInit(val azi: AziApi) {
         val d_azi = File(d_sdcard, "azi")
         d_azi.mkdirs()
         // DEBUG
-        azi.log("  touch " + azi_ok.getAbsolutePath())
+        azi.log("  touch " + azi_ok.absolutePath)
         azi_ok.createNewFile()
-    }
-}
-
-class AziInitThread(val i: AziInit, val asset_zip: String, val target_dir: String, val cb: AziCb?): Runnable {
-    override fun run() {
-        i.doInitZip(asset_zip, target_dir, cb)
     }
 }

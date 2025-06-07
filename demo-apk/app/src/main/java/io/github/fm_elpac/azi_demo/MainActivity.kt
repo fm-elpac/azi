@@ -44,7 +44,7 @@ class MainActivity: Activity() {
         Azi.log("Demo.openCleanWebView()  " + url)
 
         val w = WebView(this)
-        w.settings.setJavaScriptEnabled(true)
+        w.settings.javaScriptEnabled = true
         w.setWebViewClient(WebViewClient())
 
         setContentView(w)

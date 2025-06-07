@@ -10,24 +10,24 @@
 
     <application
         android:name=".DemoApp"
+        android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:theme="@style/Theme.AziDemo"
         android:allowBackup="true"
+        android:supportsRtl="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/ic_launcher"
-        android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
-        android:supportsRtl="true"
-        android:theme="@style/Theme.AziDemo"
         android:usesCleartextTraffic="true"
-        tools:targetApi="31">
+        tools:targetApi="35">
 
         <activity
             android:name=".MainActivity"
-            android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.AziDemo"
             android:launchMode="singleTop"
-            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode">
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
