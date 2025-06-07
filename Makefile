@@ -1,7 +1,7 @@
 # azi build Makefile
 
 # fdroid build
-all: fdroid-setup azi-unzip ui-loader azi-aar demo-apk
+all: fdroid-setup azi-unzip npm-setup ui-loader azi-aar demo-apk
 .PHONY: all
 
 # 构建: azi-demo.apk
@@ -39,9 +39,19 @@ azi-unzip:
 	cargo build --target aarch64-linux-android --release
 .PHONY: azi-unzip
 
+# npm install
+npm-setup:
+	cd ui-loader && npm install
+.PHONY: npm-setup
+
 # 构建: azi-loader
 ui-loader:
-	echo TODO
+	cd ui-loader && npm run build
+	mkdir -p azi-aar/libazi/src/main/assets/azi/loader
+	cp ui-loader/dist/index.html azi-aar/libazi/src/main/assets/azi/loader/
+	mkdir -p azi-aar/libazi/src/main/assets/azi/loader/assets
+	cp ui-loader/dist/assets/*.js azi-aar/libazi/src/main/assets/azi/loader/assets/
+	cp ui-loader/dist/assets/*.css azi-aar/libazi/src/main/assets/azi/loader/assets/
 .PHONY: ui-loader
 
 # fdroid 初始化准备工作

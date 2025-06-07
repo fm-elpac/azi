@@ -22,12 +22,14 @@ class MainActivity: Activity() {
         // 显示 WebView
         setContentView(w.getWebView())
 
-        // TODO
         // status bar color (black)
         window.statusBarColor = 0xff000000.toInt()
 
         // 添加自定义 js api
         w.addJsApi("demo", DemoApi(this))
+        w.addJsApi("azi_api", LoaderApi())
+        // 显示 ui-loader
+        w.loadLoader()
 
         aw = w
         // 开始 (后台) 初始化
@@ -59,5 +61,19 @@ class DemoApi(val a: MainActivity) {
         a.aw?.runOnUiThread {
             a.openCleanWebView(url)
         }
+    }
+}
+
+class LoaderApi() {
+    // azi_api.getJsLoadList()
+    @JavascriptInterface
+    fun getJsLoadList(): List<String> {
+        return listOf<String>()
+    }
+
+    // azi_api.checkInit()
+    @JavascriptInterface
+    fun checkInit(): String {
+        return "加载中 .. ."
     }
 }

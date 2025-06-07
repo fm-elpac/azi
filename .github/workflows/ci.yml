@@ -35,6 +35,14 @@ jobs:
           name: azi-unzip
           path: unzip
 
+      # azi-loader.zip
+      - run: make npm-setup ui-loader
+      # upload
+      - uses: actions/upload-artifact@v4
+        with:
+          name: azi-loader
+          path: azi-aar/libazi/src/main/assets/azi/loader
+
       # azi.aar
       - run: make azi-aar
       # upload
