@@ -8,7 +8,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v4
       - uses: denoland/setup-deno@v2
@@ -62,7 +61,7 @@ jobs:
           path: azi-demo-debug.apk
 
   build-fdroid:
-    #needs: build
+    needs: build
     runs-on: ubuntu-latest
     container:
       image: registry.gitlab.com/fdroid/fdroidserver:buildserver
