@@ -1,0 +1,134 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - uses: actions/setup-java@v4
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - run: deno fmt --check
+
+      # azi-unzip
+      - run: rustup target add aarch64-linux-android
+      - run: cd azi-unzip && cargo fmt --check
+      - run: cd azi-unzip && cargo build
+      - run: cd azi-unzip && cargo test
+      # aarch64-linux-android
+      - run: make azi-unzip
+      # upload
+      - run: cp azi-unzip/target/aarch64-linux-android/release/azi-unzip unzip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: azi-unzip
+          path: unzip
+
+      # azi-loader.zip
+      - run: make npm-setup ui-loader
+      # upload
+      - uses: actions/upload-artifact@v4
+        with:
+          name: azi-loader
+          path: azi-aar/libazi/src/main/assets/azi/loader
+
+      # azi.aar
+      - run: make azi-aar
+      # upload
+      - run: cp azi-aar/libazi/build/outputs/aar/libazi-release.aar azi.aar
+      - uses: actions/upload-artifact@v4
+        with:
+          name: azi-aar
+          path: azi.aar
+
+      # azi-demo.apk
+      - run: make demo-apk
+      # upload
+      - run: cp demo-apk/app/build/outputs/apk/debug/app-debug.apk azi-demo-debug.apk
+      - uses: actions/upload-artifact@v4
+        with:
+          name: azi-demo-debug.apk
+          path: azi-demo-debug.apk
+
+  build-fdroid:
+    #needs: build
+    runs-on: ubuntu-latest
+    container:
+      image: registry.gitlab.com/fdroid/fdroidserver:buildserver
+    steps:
+      - uses: actions/checkout@v4
+
+      - run: apt-get update && apt-get dist-upgrade
+
+      - name: setup env
+        run: |
+          . /etc/profile.d/bsenv.sh
+          # save env
+          echo "ANDROID_HOME=${ANDROID_HOME}" >> "$GITHUB_ENV"
+          echo "DEBIAN_FRONTEND=${DEBIAN_FRONTEND}" >> "$GITHUB_ENV"
+          echo "home_vagrant=${home_vagrant}" >> "$GITHUB_ENV"
+          echo "fdroidserver=${fdroidserver}" >> "$GITHUB_ENV"
+          echo "LC_ALL=${LC_ALL}" >> "$GITHUB_ENV"
+
+          # more env
+          echo PYTHONPATH="$fdroidserver:$fdroidserver/examples" >> "$GITHUB_ENV"
+          echo JAVA_HOME=$(java -XshowSettings:properties -version 2>&1 > /dev/null | grep 'java.home' | awk -F'=' '{print $2}' | tr -d ' ') >> "$GITHUB_ENV"
+          # PATH
+          echo PATH="$fdroidserver:$PATH" >> "$GITHUB_ENV"
+
+          # debug
+          cat "$GITHUB_ENV"
+
+      - run: sdkmanager "platform-tools" "build-tools;31.0.0"
+
+      # fdroiddata
+      - run: git clone --depth=1 --single-branch https://gitlab.com/fdroid/fdroiddata /build
+      - run: cp .fdroid.yml /build/metadata/io.github.fm_elpac.azi_demo.yml
+
+      # fdroidserver
+      - run: git clone --depth=1 --single-branch https://gitlab.com/fdroid/fdroidserver $fdroidserver
+
+      - name: "> fdroid readmeta && fdroid rewritemeta"
+        run: |
+          cd /build
+          fdroid readmeta
+          fdroid rewritemeta io.github.fm_elpac.azi_demo
+
+      # DEBUG
+      - run: cat /build/metadata/io.github.fm_elpac.azi_demo.yml
+
+      - name: "> fdroid checkupdates"
+        run: |
+          cd /build
+          fdroid checkupdates --allow-dirty io.github.fm_elpac.azi_demo
+
+      # - name: "> fdroid lint"
+      #   run: |
+      #     cd /build
+      #     fdroid lint io.github.fm_elpac.azi_demo
+
+      - name: "> fdroid fetchsrclibs"
+        run: |
+          cd /build
+          fdroid fetchsrclibs --verbose io.github.fm_elpac.azi_demo
+
+      - name: "> fdroid build"
+        run: |
+          cd /build
+          fdroid build --verbose --on-server --no-tarball io.github.fm_elpac.azi_demo
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: unsigned-fdroid
+          path: /build/unsigned

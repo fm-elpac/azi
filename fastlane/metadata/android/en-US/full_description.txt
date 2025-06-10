@@ -1,0 +1,8 @@
+This is a <b>Demo</b> of Azi library. Azi is a library for init Termux-like app.
+
+On first run, Azi will extract a zip from apk's <code>assets</code>, and then call <code>/system/bin/sh</code> to run <code>azi_init.sh</code> to do some setup.
+After that, user can edit data files easily in <code>/sdcard/Android/data</code> directory of this app.
+
+This app can be used to test how Azi works on a device.
+
+This app ONLY support <code>aarch64</code> (arm64) CPU !!

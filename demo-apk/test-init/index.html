@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
+    <title>Azi Demo</title>
+    <style type="text/css">
+      body {
+        margin: 0;
+        background-color: #b3e5fc;
+
+        height: 100vh;
+        font-size: 16px;
+      }
+
+      .demo-box {
+        height: 100%;
+        box-sizing: border-box;
+        padding: 1em;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-around;
+      }
+
+      a {
+        word-wrap: break-word;
+        word-break: break-all;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="demo-box">
+      <h1>Azi Demo</h1>
+
+      <div class="link-box">
+        <p>Test open page in WebView:</p>
+        <p><a href="#">https://www.whatsmybrowser.org/</a></p>
+        <p><a href="#">https://www.whatismybrowser.com/</a></p>
+        <p><a href="#">https://browser.is/</a></p>
+      </div>
+
+      <div class="ua" id="ua"></div>
+    </div>
+
+    <script>
+      function initDemo() {
+        // show userAgent
+        const ua = document.getElementById("ua");
+        ua.textContent = navigator.userAgent;
+
+        // a link
+        const a = document.querySelectorAll("a");
+        for (let i of a) {
+          (function () {
+            i.addEventListener("click", () => {
+              const url = i.textContent;
+              // DEBUG
+              console.log("click a", url);
+
+              // call api
+              if (null != window.demo) {
+                if (typeof demo.openPage == "function") {
+                  demo.openPage(url);
+                }
+              }
+            });
+          })();
+        }
+
+        // DEBUG
+        console.log("demo js load");
+      }
+
+      initDemo();
+    </script>
+  </body>
+</html>

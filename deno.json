@@ -1,0 +1,6 @@
+{
+  "exclude": [
+    "tmp"
+  ],
+  "unstable": ["fmt-component"]
+}

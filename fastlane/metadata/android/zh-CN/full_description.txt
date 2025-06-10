@@ -1,0 +1,8 @@
+这是胖喵安初 (azi 库) 的示例应用. 胖喵安初是一个用于初始化类似 Termux 的应用的库.
+
+首次运行时, 胖喵安初将从 apk 的 <code>assets</code> 中提取一个 zip 压缩包, 然后调用 <code>/system/bin/sh</code> 运行 <code>azi_init.sh</code> 进行初始化.
+然后用户可以轻松的编辑此应用的 <code>/sdcard/Android/data</code> 目录中的数据文件.
+
+此应用可用于测试胖喵安初在一个设备上如何工作.
+
+此应用仅支持 <code>aarch64</code> (arm64) 处理器 !!
