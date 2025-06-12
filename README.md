@@ -11,7 +11,8 @@ Termux-like app)
 
 - <https://bitbucket.org/fm-elpac/azi/>
 - <https://codeberg.org/fm-elpac/azi>
-- <https://gitlab.com/fm-elpac/azi>
+- <https://notabug.org/fm-elpac/azi>
+- <https://framagit.org/fm-elpac/azi>
 
 正式名称: 紫腹巨蚊 (Toxorhynchites gravelyi) 系列 黑腹果蝇 (Drosophila
 melanogaster) 库
