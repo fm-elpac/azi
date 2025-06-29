@@ -6,6 +6,7 @@
 Termux-like app)
 
 ![CI](https://github.com/fm-elpac/azi/actions/workflows/ci.yml/badge.svg)
+<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" height="75" />
 
 镜像 (mirror):
 
@@ -13,6 +14,13 @@ Termux-like app)
 - <https://codeberg.org/fm-elpac/azi>
 - <https://notabug.org/fm-elpac/azi>
 - <https://framagit.org/fm-elpac/azi>
+
+---
+
+- <https://git.disroot.org/fm-elpac/azi>
+- <https://git.pub.solar/fm-elpac/azi>
+- <https://www.gitlink.org.cn/fm-elpac/azi>
+- <https://atomgit.com/fm-elpac/azi>
 
 正式名称: 紫腹巨蚊 (Toxorhynchites gravelyi) 系列 黑腹果蝇 (Drosophila
 melanogaster) 库
