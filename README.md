@@ -6,7 +6,10 @@
 app)
 
 ![CI](https://github.com/fm-elpac/azi/actions/workflows/ci.yml/badge.svg)
-<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" height="75" />
+
+[<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png"
+     alt="Get it on F-Droid"
+     height="80">](https://f-droid.org/packages/io.github.fm_elpac.azi_demo/)
 
 镜像 (mirror):
 
