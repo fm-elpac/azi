@@ -2,8 +2,8 @@
 
 <https://github.com/fm-elpac/azi>
 
-胖喵安初: Android 应用初始化框架 (Android Zip Init: A library for init
-Termux-like app)
+胖喵安初: Android 应用初始化库 (Android Zip Init: A library for init Termux-like
+app)
 
 ![CI](https://github.com/fm-elpac/azi/actions/workflows/ci.yml/badge.svg)
 <img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" height="75" />
