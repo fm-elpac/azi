@@ -5,4 +5,8 @@ edition = "2024"
 license = "MIT"
 
 [dependencies]
-zip = "^4.0.0"
+zip = "^4.3.0"
+
+[profile.release]
+strip = true
+lto = true
