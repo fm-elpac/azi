@@ -25,7 +25,7 @@ demo-apk-azi-aar:
 #  使用 zip 生成 test-init.azi.zip
 demo-apk-init-zip:
 	mkdir -p demo-apk/app/src/main/assets
-	cd demo-apk/test-init && zip ../test-init.azi.zip *
+	cd demo-apk/test-init && zip -r ../test-init.azi.zip *
 	mv demo-apk/test-init.azi.zip demo-apk/app/src/main/assets/
 .PHONY: demo-apk-init-zip
 
