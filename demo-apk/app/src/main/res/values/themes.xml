@@ -1,7 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <!-- `deno fmt` ignore this -->
   <style
     name="Theme.AziDemo"
     parent="android:Theme.Material.Light.NoActionBar"
-  />
+  >
+    <item name="android:statusBarColor">@color/black</item>
+
+    <!-- TODO
+      https://dev.to/lejdi/handling-android-toolbars-in-android-15-1od
+      not work on Android >= 16
+    -->
+    <item name="android:windowOptOutEdgeToEdgeEnforcement">true</item>
+  </style>
 </resources>

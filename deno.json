@@ -1,6 +1,7 @@
 {
   "exclude": [
-    "tmp"
+    "tmp",
+    "demo-apk/app/src/main/res/values/themes.xml"
   ],
   "unstable": ["fmt-component"]
 }

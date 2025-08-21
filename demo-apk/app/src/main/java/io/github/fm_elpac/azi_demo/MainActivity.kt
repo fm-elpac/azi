@@ -2,6 +2,7 @@ package io.github.fm_elpac.azi_demo
 
 import android.app.Activity
 import android.os.Bundle
+import android.view.WindowManager
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.webkit.JavascriptInterface
@@ -22,8 +23,10 @@ class MainActivity: Activity() {
         // 显示 WebView
         setContentView(w.getWebView())
 
-        // status bar color (black)
-        window.statusBarColor = 0xff000000.toInt()
+        // 显示并绘制顶部系统栏
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+        // TODO
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
 
         // 添加自定义 js api
         w.addJsApi("demo", DemoApi(this))
