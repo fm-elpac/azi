@@ -22,9 +22,15 @@ class AziInit(val azi: AziApi) {
         azi.log("AziInit.initZip()  " + asset_zip + " -> " + target_dir)
 
         checkUnzip(asset_zip, target_dir)
-        checkInitSh(target_dir)
+        try {
+            checkInitSh(target_dir)
 
-        okCb(cb)
+            okCb(cb)
+        } catch (e: Exception) {
+            // 如果 azi_init.sh 执行失败, 应用不应崩溃 (直接退出)
+            // TODO 在用户界面显示错误信息 ?
+            e.printStackTrace()
+        }
     }
 
     // 执行成功后的回调

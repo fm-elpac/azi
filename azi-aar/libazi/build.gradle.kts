@@ -5,7 +5,7 @@ plugins {
 
 android {
     namespace = "io.github.fm_elpac.azi"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 27
@@ -34,8 +34,6 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

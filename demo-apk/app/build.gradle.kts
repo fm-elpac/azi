@@ -5,16 +5,15 @@ plugins {
 
 android {
     namespace = "io.github.fm_elpac.azi_demo"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "io.github.fm_elpac.azi_demo"
         minSdk = 27
-        //targetSdk = 28
-        targetSdk = 35
+        targetSdk = 36
 
-        versionCode = 2
-        versionName = "0.1.0"
+        versionCode = 3
+        versionName = "0.1.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -44,8 +43,7 @@ android {
 
 dependencies {
     implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
+    implementation(libs.androidx.lifecycle.runtime.ktx)
 
     implementation(files("libs/azi.aar"))
 
