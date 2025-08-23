@@ -39,6 +39,9 @@ class AziWebView(val c: Context) {
         w.settings.setGeolocationEnabled(false)
         // TODO
         w.setWebViewClient(WebViewClient())
+
+        // 修复: 高版本 Android 滚动行为 (拉伸) 导致页面滚动到底部/顶部时, 页面内容变形
+        w.overScrollMode = WebView.OVER_SCROLL_NEVER
     }
 
     /**

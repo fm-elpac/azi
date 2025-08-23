@@ -51,6 +51,8 @@ class MainActivity: Activity() {
         val w = WebView(this)
         w.settings.javaScriptEnabled = true
         w.setWebViewClient(WebViewClient())
+        // 修复: 高版本 Android 滚动行为 (拉伸) 导致页面滚动到底部/顶部时, 页面内容变形
+        w.overScrollMode = WebView.OVER_SCROLL_NEVER
 
         setContentView(w)
         w.loadUrl(url)
