@@ -5,12 +5,15 @@ plugins {
 
 android {
     namespace = "io.github.fm_elpac.azi_demo"
-    compileSdk = 36
+    // Android 15 (api level 35)
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "io.github.fm_elpac.azi_demo"
+
         minSdk = 27
-        targetSdk = 36
+        // Android 15 (api level 35)
+        targetSdk = 35
 
         versionCode = 3
         versionName = "0.1.1"
