@@ -1,0 +1,1 @@
+修复: <code>azi_init.sh</code> 运行失败时崩溃.
